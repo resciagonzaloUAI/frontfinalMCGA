@@ -1,0 +1,17 @@
+button {
+    display: block;
+    width: 250px;
+    height: 40px;
+    border: 2px solid #000;
+  }
+  
+  button:hover {
+    background-color: brown;
+  }
+  .cancel {
+    background-color:red;
+  }
+  
+  .confirm {
+    background-color:green;
+  }
