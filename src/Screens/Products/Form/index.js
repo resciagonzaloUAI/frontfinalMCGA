@@ -4,12 +4,10 @@ import styles from './form.module.css';
 import Input from '../../../Components/Compartido/Input';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
-import { getProductByIdOrName, postProducts, editProducts, getProducts } from '../../../redux/products/thunks';
+import { getByIdProducts, postProducts, editProducts, getProducts } from '../../../redux/products/thunks';
 
 
 const Form = (props) => {
-  const isLoggedIn = localStorage.getItem('accessToken');
-
 
   const [formMode, setFormMode] = useState(true);
   const [formText, setFormText] = useState('Agregar Producto');
@@ -30,7 +28,7 @@ const Form = (props) => {
   useEffect(() => {
     dispatch(getProducts());
     if (id) {
-      dispatch(getProductByIdOrName(id));
+      dispatch(getByIdProducts(id));
     }
   }, []);
 
@@ -60,15 +58,6 @@ const Form = (props) => {
       window.location.reload();
     }
   };
-
-  if (!isLoggedIn) {
-   return (
-   <section>
-    <div>
-      <h2>Necesita estar logueado para acceder a esta página.</h2>
-    </div>
-  </section>)
-  }
 
   if (isPending) {
     return (
