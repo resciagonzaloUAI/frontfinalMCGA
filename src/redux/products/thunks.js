@@ -20,7 +20,8 @@ import {
     return async (dispatch) => {
       dispatch(getProductsPending());
       try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
+        // const response = await fetch(`${process.env.REACT_APP_API_URL}/products`);
+        const response = await fetch(`https://backfinal-mcga.vercel.app/products/`);
         const json = await response.json();
         if(response.status !== 200 ){
           dispatch(getProductsError(json.toString()))
