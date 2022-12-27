@@ -12,10 +12,10 @@ const Login = (props) => {
   const { register, handleSubmit, formState: { errors } } = useForm();
   const onSubmit = async (event) => {
     dispatch(login({...event}));
-   history.push('/home');
+    history.push('/home');
     setTimeout(() => {
     window.location.reload();      
-    }, 100);
+    }, 500);
   }
 
   return (
