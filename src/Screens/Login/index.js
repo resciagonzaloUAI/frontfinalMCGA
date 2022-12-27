@@ -14,7 +14,7 @@ const Login = (props) => {
     dispatch(login({...event}));
    history.push('/home');
     setTimeout(() => {
-    //  window.location.reload();      
+    window.location.reload();      
     }, 100);
   }
 
