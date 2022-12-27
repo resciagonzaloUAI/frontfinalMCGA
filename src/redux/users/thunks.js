@@ -3,11 +3,11 @@ import {
     getUserError,
     getUserLoading
 } from './actions'
-
+/*
 export const getUsers = (data) => async (dispatch) => {
     dispatch(getUserLoading());
     try {
-        const response = await fetch('https://backend-mcga-final.vercel.app/Users/login', {
+        const response = await fetch('${process.env.REACT_APP_API_URL}/Users/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
@@ -22,11 +22,12 @@ export const getUsers = (data) => async (dispatch) => {
     } catch (error) {
         dispatch(getUserError(error));
     }
-}
+}*/
 
 export const login = (data) => async (dispatch) => {
     try {
-        const response = await fetch(`${process.env.REACT_APP_API_URL}/users/login`, {
+        // const response = await fetch(`https://backfinal-mcga.vercel.app/Users/login`, {
+            const response = await fetch('https://backfinal-mcga.vercel.app/Users/login', {
             method: 'POST',
             headers: {'Content-Type': 'application/json'},
             body: JSON.stringify(data)
