@@ -56,7 +56,12 @@ import {
       dispatch(deleteProductsPending());
       try {
         const response = await fetch(`${process.env.REACT_APP_API_URL}/products/${id}`, {
-          method: 'DELETE'
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+            token: localStorage.getItem('accessToken')
+          },
         });
         const json = await response.json();
         if(response.status !== 200 ){
@@ -79,7 +84,8 @@ import {
             method: 'POST',
             headers: {
               Accept: 'application/json',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              token: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
               id: id, 
@@ -108,7 +114,8 @@ import {
             method: 'PUT',
             headers: {
               Accept: 'application/json',
-              'Content-Type': 'application/json'
+              'Content-Type': 'application/json',
+              token: localStorage.getItem('accessToken')
             },
             body: JSON.stringify({
               name: name,

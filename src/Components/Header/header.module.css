@@ -32,6 +32,17 @@
     color: black;
   }
 
+.cerrarsesion {
+  cursor:pointer;
+  margin-left: 15px;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+  text-transform: capitalize;
+  margin-top:-3%;
+  color: black;
+  }
+
   a:hover{
     text-decoration: none;
     color:cadetblue;

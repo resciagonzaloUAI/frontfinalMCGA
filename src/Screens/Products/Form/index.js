@@ -8,6 +8,8 @@ import { getProductByIdOrName, postProducts, editProducts, getProducts } from '.
 
 
 const Form = (props) => {
+  const isLoggedIn = localStorage.getItem('accessToken');
+
 
   const [formMode, setFormMode] = useState(true);
   const [formText, setFormText] = useState('Agregar Producto');
@@ -58,6 +60,15 @@ const Form = (props) => {
       window.location.reload();
     }
   };
+
+  if (!isLoggedIn) {
+   return (
+   <section>
+    <div>
+      <h2>Necesita estar logueado para acceder a esta página.</h2>
+    </div>
+  </section>)
+  }
 
   if (isPending) {
     return (

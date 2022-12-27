@@ -29,6 +29,10 @@
     text-transform: uppercase;
     
   }
+
+  .add {
+    cursor:pointer;
+  }
   
   table {
     background: white;
@@ -154,19 +158,36 @@
     margin-top: 5px;
   }
   
-
   button.update{
     height: 35px;
     width: 40px;
     border: 0px;
     background-color: inherit;
-    text-decoration: none;
+    cursor:pointer;
   }
-  
+
   button.delete{
     height: 35px;
     width: 40px;
     border: 0px;
     background-color: inherit;
+    cursor:pointer;
   }
   
+.customStyles {
+      width: 50%;
+      height: 200px;
+      margin-left:25%;
+      margin-top:25%;
+      background-color: white;
+      border-style:solid;
+  }
+
+  .tituloModal {
+    margin-left:18%;
+    margin-top:5px;
+  }
+
+  .buttonModalOk {
+    margin-top:5%;
+  }

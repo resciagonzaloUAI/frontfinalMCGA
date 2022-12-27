@@ -4,14 +4,16 @@ import { Link } from 'react-router-dom';
 import styles from './products.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { getProducts, deleteProducts } from '../../redux/products/thunks';
-
-
+import Modal from 'react-modal';
 
 
 const Products = (props) => {
   
+  const isLoggedIn = localStorage.getItem('accessToken');
+  
   const dispatch = useDispatch();
   const [products, setProducts] = useState([]);
+  const [productToBeDeleted, setProductToBeDeleted] = useState(null);
 
   const {
     isLoading,
@@ -25,15 +27,45 @@ const Products = (props) => {
   
   
 
-  const deleteProduct = async (id) => {
-      dispatch(deleteProducts(id));
+  const deleteProduct = async () => {
+      dispatch(deleteProducts(productToBeDeleted));
+      setIsOpen(false);
   };
+  
+ 
+
+  let subtitle;
+  const [modalIsOpen, setIsOpen] = React.useState(false);
+  function openModal(productId) {
+    console.log(productId);
+    setProductToBeDeleted(productId);
+    setIsOpen(true);
+  }
+  function afterOpenModal() {
+    // references are now sync'd and can be accessed.
+    subtitle.style.color = '#f00';
+  }
+  function closeModal() {
+    setProductToBeDeleted(null);
+    setIsOpen(false);
+  }
+
+
+  if (!isLoggedIn) {
+    return (
+    <section>
+     <div>
+       <h2>Necesita estar logueado para acceder a esta página.</h2>
+     </div>
+   </section>)
+   }
+
 
   return (
     <section className={styles.container}>
       <div className={styles.list}>
         <div className={styles.tableTitle}>
-          <h2>Productos</h2>
+          <h2>Listado de productos</h2>
           <button
             className={styles.add}
             onClick={() => {
@@ -71,7 +103,7 @@ const Products = (props) => {
                     <button
                       className={styles.delete}
                       onClick={() => {
-                        deleteProduct(product.id);
+                        openModal(product.id);
                       }}
                     >
                       <p> Eliminar </p>
@@ -83,6 +115,17 @@ const Products = (props) => {
           </tbody>
         </table>
       </div>
+      <Modal
+        isOpen={modalIsOpen}
+        onAfterOpen={afterOpenModal}
+        onRequestClose={closeModal}
+        className={styles.customStyles}
+        contentLabel="Eliminar"
+      >
+        <h2 className={styles.tituloModal}>¿Está seguro de que desea eliminar este producto?</h2>
+        <button className={styles.buttonModalOk} onClick={deleteProduct}>Confirmar</button> 
+        <button className={styles.buttonModalCancel} onClick={closeModal}>Cancelar</button> 
+      </Modal>
     </section>
   )
 };

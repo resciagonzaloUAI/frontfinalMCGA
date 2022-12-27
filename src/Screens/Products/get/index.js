@@ -1,6 +1,5 @@
 import React from 'react'
 import { useEffect, useState } from 'react';
-import { Link } from 'react-router-dom';
 import styles from './get.module.css';
 import { useSelector, useDispatch } from 'react-redux';
 import {  getProducts } from '../../../redux/products/thunks';
@@ -23,6 +22,9 @@ const Productos = (props) => {
       dispatch(getProducts());
   }, [dispatch]);
   
+
+
+
   
   return (
     <section className={styles.container}>

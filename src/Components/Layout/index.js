@@ -7,6 +7,7 @@ import Home from '../Home';
 import Products from '../../Screens/Products';
 import Productos from '../../Screens/Products/get';
 import ProductsForm from '../../Screens/Products/Form';
+import Login from '../../Screens/Login';
 
 const Layout = () => {
   return (
@@ -15,6 +16,7 @@ const Layout = () => {
       <Switch>
         <Route exact path="/home" component={Home} />
         <Route exact path="/products" component={Products} />
+        <Route path="/login" component={Login} />
         <Route exact path="/products/get" component={Productos} />
         <Route path="/products/form" component={ProductsForm} />
         <Route path="/products/:id" component={ProductsForm} />
