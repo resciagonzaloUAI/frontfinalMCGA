@@ -4,10 +4,12 @@ import styles from './form.module.css';
 import Input from '../../../Components/Compartido/Input';
 import { useSelector, useDispatch } from 'react-redux';
 import { useForm } from "react-hook-form";
-import { getByIdProducts, postProducts, editProducts, getProducts } from '../../../redux/products/thunks';
+import { getProductByIdOrName, postProducts, editProducts, getProducts } from '../../../redux/products/thunks';
 
 
 const Form = (props) => {
+  const isLoggedIn = localStorage.getItem('accessToken');
+
 
   const [formMode, setFormMode] = useState(true);
   const [formText, setFormText] = useState('Agregar Producto');
@@ -28,7 +30,7 @@ const Form = (props) => {
   useEffect(() => {
     dispatch(getProducts());
     if (id) {
-      dispatch(getByIdProducts(id));
+      dispatch(getProductByIdOrName(id));
     }
   }, []);
 
@@ -49,22 +51,31 @@ const Form = (props) => {
 
       const id = (Math.max.apply(Math, productList.map(function(o) { return o.id || 0; })))+1;
       dispatch(postProducts(id, event.name, event.description, event.price, event.stock));
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();      
+        }, 2000);
   
 
     } else {
       dispatch(editProducts(id, event.name, event.description, event.price, event.stock));
       props.history.push('/products');
-      window.location.reload();
+      setTimeout(() => {
+        window.location.reload();      
+        }, 2000);
     }
   };
 
+  if (!isLoggedIn) {
+   return (
+   <section>
+    <div>
+      <h2>Necesita estar logueado para acceder a esta página.</h2>
+    </div>
+  </section>)
+  }
+
   if (isPending) {
-    return (
-      <div className={styles.spinnerContainer}>
-        <img src="/assets/icons/spinner.gif" alt="spinner" />
-      </div>
-    )
+ 
   } else if (error !== false) {
     return (
       <section className={styles.container}>
