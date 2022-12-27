@@ -15,7 +15,7 @@ const Login = (props) => {
     history.push('/home');
     setTimeout(() => {
     window.location.reload();      
-    }, 500);
+    }, 2000);
   }
 
   return (
